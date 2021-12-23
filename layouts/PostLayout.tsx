@@ -97,7 +97,7 @@ export default function PostLayout({ frontMatter, authorDetails, next, prev, chi
             <div className="divide-y divide-gray-200 dark:divide-gray-700 xl:pb-0 xl:col-span-3 xl:row-span-2">
               <div className="pt-10 pb-8 prose dark:prose-dark max-w-none">{children}</div>
               <SocialButtons
-                postUrl={siteMetadata.siteUrl + '/' + slug}
+                postUrl={siteMetadata.siteUrl + '/blog/' + slug}
                 title={title}
                 fileName={fileName}
               />

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://andrianian.vercel.app/sitemap.xml
+Sitemap: https://andrianina.vercel.app/sitemap.xml

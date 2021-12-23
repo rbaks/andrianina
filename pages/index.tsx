@@ -37,8 +37,6 @@ export const getStaticProps = async () => {
 
 export default function Home({
   recentPosts,
-  guestbookEntryCount,
-  endorsementCount,
   projectCount,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
