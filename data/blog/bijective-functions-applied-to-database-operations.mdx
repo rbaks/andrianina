@@ -1,0 +1,155 @@
+---
+title: Bijective functions applied to database operations
+date: '2021-12-21'
+tags: ['Database', 'Maths']
+draft: false
+summary: 'This blog explains how is it possible to fusion multiple schema-like databases into one without encountering any primary key collision thanks to the magic of the Cantor pairing function.'
+---
+
+# Background
+
+During my software development internship, I was given a task to automate the process of synchronizing multiple schema-like databases coming from different deployment environments. The company I was working for makes websites for their client using [Moodle](https://moodle.org/). They then needed a tool to mimic the usual [CI/CD workflow](#) they have been adopting for a while.
+
+Unlike any other software project, Moodle appears to work like a CMS[^1] (ie.) the entire website is dynamically generated from the database at runtime - even Html and CSS code modifications.
+
+It is therefore unlikely to use any existing DevOps[^2] tool like git and Jenkins. A simple database synchronization could lead to data loss knowing that many databases can have similar primary keys and cause rows to overwrite each other. 
+
+Thus, work had to be done. I had 3 months to program a tool to automate a task where, even made manually, is nearly impossible to complete. 
+This is where Maths does its magic.
+
+[^1]: Content Managment System
+[^2]: DevOps
+
+# Reformulating the problem
+
+Given an **infinite number** of schema-like databases, write a program to effectively synchronize them into one central database without any primary key collision. The real problem here is collision avoidance. We will then reformulate to **database fusion**.
+
+# Solution
+
+We could think of modifying the primary key value of each row before any synchronisation and bringing down those changes in **cascade** to the refering foreign keys. However, not every database has foreign keys and so does the database scheme Moodle uses.
+
+It is then preferable to control the primary key values even before insertion of any rows. Thus, overriding the `auto-increment` behavior.
+
+## 2 databases case
+
+# Deriving the OLS Estimator
+
+Using matrix notation, let $n$ denote the number of observations and $k$ denote the number of regressors.
+
+The vector of outcome variables $\mathbf{Y}$ is a $n \times 1$ matrix,
+
+```tex
+\mathbf{Y} = \left[\begin{array}
+  {c}
+  y_1 \\
+  . \\
+  . \\
+  . \\
+  y_n
+\end{array}\right]
+```
+
+$$
+\mathbf{Y} = \left[\begin{array}
+  {c}
+  y_1 \\
+  . \\
+  . \\
+  . \\
+  y_n
+\end{array}\right]
+$$
+
+The matrix of regressors $\mathbf{X}$ is a $n \times k$ matrix (or each row is a $k \times 1$ vector),
+
+```latex
+\mathbf{X} = \left[\begin{array}
+  {ccccc}
+  x_{11} & . & . & . & x_{1k} \\
+  . & . & . & . & .  \\
+  . & . & . & . & .  \\
+  . & . & . & . & .  \\
+  x_{n1} & . & . & . & x_{nn}
+\end{array}\right] =
+\left[\begin{array}
+  {c}
+  \mathbf{x}'_1 \\
+  . \\
+  . \\
+  . \\
+  \mathbf{x}'_n
+\end{array}\right]
+```
+
+$$
+\mathbf{X} = \left[\begin{array}
+  {ccccc}
+  x_{11} & . & . & . & x_{1k} \\
+  . & . & . & . & .  \\
+  . & . & . & . & .  \\
+  . & . & . & . & .  \\
+  x_{n1} & . & . & . & x_{nn}
+\end{array}\right] =
+\left[\begin{array}
+  {c}
+  \mathbf{x}'_1 \\
+  . \\
+  . \\
+  . \\
+  \mathbf{x}'_n
+\end{array}\right]
+$$
+
+The vector of error terms $\mathbf{U}$ is also a $n \times 1$ matrix.
+
+At times it might be easier to use vector notation. For consistency, I will use the bold small x to denote a vector and capital letters to denote a matrix. Single observations are denoted by the subscript.
+
+## Least Squares
+
+**Start**:  
+$$y_i = \mathbf{x}'_i \beta + u_i$$
+
+**Assumptions**:
+
+1. Linearity (given above)
+2. $E(\mathbf{U}|\mathbf{X}) = 0$ (conditional independence)
+3. rank($\mathbf{X}$) = $k$ (no multi-collinearity i.e. full rank)
+4. $Var(\mathbf{U}|\mathbf{X}) = \sigma^2 I_n$ (Homoskedascity)
+
+**Aim**:  
+Find $\beta$ that minimises the sum of squared errors:
+
+$$
+Q = \sum_{i=1}^{n}{u_i^2} = \sum_{i=1}^{n}{(y_i - \mathbf{x}'_i\beta)^2} = (Y-X\beta)'(Y-X\beta)
+$$
+
+**Solution**:  
+Hints: $Q$ is a $1 \times 1$ scalar, by symmetry $\frac{\partial b'Ab}{\partial b} = 2Ab$.
+
+Take matrix derivative w.r.t $\beta$:
+
+```tex
+\begin{aligned}
+  \min Q           & = \min_{\beta} \mathbf{Y}'\mathbf{Y} - 2\beta'\mathbf{X}'\mathbf{Y} +
+  \beta'\mathbf{X}'\mathbf{X}\beta \\
+                   & = \min_{\beta} - 2\beta'\mathbf{X}'\mathbf{Y} + \beta'\mathbf{X}'\mathbf{X}\beta \\
+  \text{[FOC]}~~~0 & =  - 2\mathbf{X}'\mathbf{Y} + 2\mathbf{X}'\mathbf{X}\hat{\beta}                  \\
+  \hat{\beta}      & = (\mathbf{X}'\mathbf{X})^{-1}\mathbf{X}'\mathbf{Y}                              \\
+                   & = (\sum^{n} \mathbf{x}_i \mathbf{x}'_i)^{-1} \sum^{n} \mathbf{x}_i y_i
+\end{aligned}
+```
+
+$$
+\begin{aligned}
+  \min Q           & = \min_{\beta} \mathbf{Y}'\mathbf{Y} - 2\beta'\mathbf{X}'\mathbf{Y} +
+  \beta'\mathbf{X}'\mathbf{X}\beta \\
+                   & = \min_{\beta} - 2\beta'\mathbf{X}'\mathbf{Y} + \beta'\mathbf{X}'\mathbf{X}\beta \\
+  \text{[FOC]}~~~0 & =  - 2\mathbf{X}'\mathbf{Y} + 2\mathbf{X}'\mathbf{X}\hat{\beta}                  \\
+  \hat{\beta}      & = (\mathbf{X}'\mathbf{X})^{-1}\mathbf{X}'\mathbf{Y}                              \\
+                   & = (\sum^{n} \mathbf{x}_i \mathbf{x}'_i)^{-1} \sum^{n} \mathbf{x}_i y_i
+\end{aligned}
+$$
+
+
+
+
