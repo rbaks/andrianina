@@ -93,36 +93,6 @@ export default function Home({
         Showcase
       </h2>
       <div className="py-8 grid grid-cols-1 grid-rows-3 grid-flow-row sm:grid-rows-1 sm:grid-cols-2 xl:grid-cols-3 justify-between gap-4">
-        <InternalCard href={`/endorsements`} title="Endorsements">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            className="h-6 w-6 inline-block fill-current"
-          >
-            <g data-name="Layer 2">
-              <g data-name="award">
-                <rect width="24" height="24" opacity="0" />
-                <path d="M19 20.75l-2.31-9A5.94 5.94 0 0 0 18 8 6 6 0 0 0 6 8a5.94 5.94 0 0 0 1.34 3.77L5 20.75a1 1 0 0 0 1.48 1.11l5.33-3.13 5.68 3.14A.91.91 0 0 0 18 22a1 1 0 0 0 1-1.25zM12 4a4 4 0 1 1-4 4 4 4 0 0 1 4-4zm.31 12.71a1 1 0 0 0-1 0l-3.75 2.2L9 13.21a5.94 5.94 0 0 0 5.92 0L16.45 19z" />
-              </g>
-            </g>
-          </svg>
-          {endorsementCount} endorsements
-        </InternalCard>
-        <InternalCard href={`/guestbook`} title="Guestbook">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            className="h-6 w-6 inline-block fill-current"
-          >
-            <g data-name="Layer 2">
-              <g data-name="book-open">
-                <rect width="24" height="24" transform="rotate(180 12 12)" opacity="0" />
-                <path d="M20.62 4.22a1 1 0 0 0-.84-.2L12 5.77 4.22 4A1 1 0 0 0 3 5v12.2a1 1 0 0 0 .78 1l8 1.8h.44l8-1.8a1 1 0 0 0 .78-1V5a1 1 0 0 0-.38-.78zM5 6.25l6 1.35v10.15L5 16.4zM19 16.4l-6 1.35V7.6l6-1.35z" />
-              </g>
-            </g>
-          </svg>
-          {guestbookEntryCount} entries
-        </InternalCard>
         <InternalCard href={`/projects`} title="Projects">
           <svg
             xmlns="http://www.w3.org/2000/svg"
