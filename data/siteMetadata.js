@@ -9,7 +9,7 @@ const siteMetadata = {
   siteRepo: 'https://github.com/rbaks/andrianina',
   siteLogo: '/static/images/logo.png',
   image: '/static/images/avatar.jpg',
-  socialBanner: '/static/images/twitter-card.png',
+  socialBanner: '/static/images/image-card.png',
   email: 'andri.bakoson@gmail.com',
   github: 'https://github.com/rbaks',
   facebook: 'https://facebook.com/andrianina.rabakoson.79',
