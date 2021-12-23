@@ -11,9 +11,9 @@ summary: 'The magic of Pairing functions for database fusion.'
 
 # Background
 
-During my software development internship, I was given a task to automate the process of synchronizing multiple schema-like databases coming from different deployment environments. The company I was working for makes websites for their client using [Moodle](https://moodle.org/). They then needed a tool to mimic the usual [CI/CD workflow](#) they have been adopting for a while.
+During my software development internship, I was given a task to automate the process of synchronizing multiple schema-like databases coming from different deployment environments. The company I was working for makes websites for their clients using the [Moodle LMS](https://moodle.org/). They then needed a tool to mimic the usual [CI/CD workflow](#) they have been adopting for a while.
 
-Unlike any other software project, Moodle appears to work like a CMS[^1] (ie.) the entire website is dynamically generated from the database at runtime - even Html and CSS code modifications.
+Unlike any other software project, Moodle appears to work like a CMS[^1], i.e. the entire website is dynamically generated from the database at runtime - even Html and CSS code modifications.
 
 It is therefore unlikely to use any existing DevOps[^2] tool like git and Jenkins. A simple database synchronization could lead to data loss knowing that many databases can have similar primary keys and cause rows to overwrite each other.
 
@@ -25,17 +25,17 @@ This is where Maths does its magic.
 
 # Reformulating the problem
 
-Given an **infinite number** of schema-like databases, write a program to effectively synchronize them into one central database without any primary key collision. The real problem here is collision avoidance..
+Given an **infinite number** of schema-like databases, write a program to effectively synchronize them into one central database without any primary key collision. The real problem here is collision avoidance.
 
 # Solution
 
 At first glance, we could think of modifying the primary value for each row in each database and bring those changes down to refering foreing keys. However, it turns out that not every database has foreign keys and so does the database scheme Moodle uses.
 
-Thereby, the most intelligent way is to redefine the `auto-increment` behavior before any database insertions.
+Thereby, the most intelligent way is to redefine the `auto-increment` behavior before any row insertions.
 
 ## the case of 2 databases
 
-Let say we have 2 databases $A$ and $B$. On one hand, we can manage to set the primary key value of $A$ to only odd numbers and make $B$ fill out the space for even values on the other hand.
+Let say we have 2 databases $A$ and $B$. On one hand, we can manage to set the primary key value of $A$ to only odd numbers and make $B$ fill out the space for even values.
 
 Hence, the value of a key $m$ is defined by its row number $n$ associated with the parity $p$ given to the specific database.
 
@@ -48,10 +48,10 @@ $$
 
 ## the broader case
 
-We just need to find a bijection which associates to the unique value $m$ a pair of numbers $n$ and $q$ given that $q$ is a unique identifier of each base instead of its parity. We propose here to use the [Cantor pairing function](https://en.wikipedia.org/wiki/Pairing_function#Cantor_pairing_function)
+We just need to find a bijection which associates to the unique value $m$ a pair of numbers $n$ and $q$ given that $q$ is a unique identifier of each database instead of its parity. We propose here to use the [Cantor pairing function](https://en.wikipedia.org/wiki/Pairing_function#Cantor_pairing_function)
 
 $$
-\pi = \N \times \N \implies \N
+\pi : \N \times \N \implies \N
 $$
 
 defined by
