@@ -113,7 +113,10 @@ class MyDocument extends Document {
           <meta name="msapplication-TileColor" content="#2b5797" />
           <meta name="msapplication-config" content="/static/favicons/browserconfig.xml" />
           <meta name="theme-color" content="#ffffff" />
-          <meta name="google-site-verification" content="5qEbeXvfIVQgu147UbTIzfv5lPZwaKgFgETWOUJuM8s" />
+          <meta
+            name="google-site-verification"
+            content="5qEbeXvfIVQgu147UbTIzfv5lPZwaKgFgETWOUJuM8s"
+          />
           {/* rss */}
           <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
         </Head>
